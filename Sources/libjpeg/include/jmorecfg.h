@@ -50,14 +50,23 @@
 
 typedef unsigned char JSAMPLE;
 #define GETJSAMPLE(value)  ((int)(value))
+typedef unsigned char JOCTET;
+#define GETJOCTET(value)  (value)
+typedef unsigned char UINT8;
+typedef unsigned short UINT16;
 
 #else /* not HAVE_UNSIGNED_CHAR */
-
+typedef char JOCTET;
 typedef char JSAMPLE;
+typedef unsigned int UINT16;
 #ifdef __CHAR_UNSIGNED__
+#define GETJOCTET(value)  (value)
 #define GETJSAMPLE(value)  ((int)(value))
+typedef char UINT8;
 #else
+#define GETJOCTET(value)  ((value) & 0xFF)
 #define GETJSAMPLE(value)  ((int)(value) & 0xFF)
+typedef short UINT8;
 #endif /* __CHAR_UNSIGNED__ */
 
 #endif /* HAVE_UNSIGNED_CHAR */
@@ -99,16 +108,15 @@ typedef short JCOEF;
 
 #ifdef HAVE_UNSIGNED_CHAR
 
-typedef unsigned char JOCTET;
-#define GETJOCTET(value)  (value)
+
 
 #else /* not HAVE_UNSIGNED_CHAR */
 
-typedef char JOCTET;
+
 #ifdef __CHAR_UNSIGNED__
-#define GETJOCTET(value)  (value)
+
 #else
-#define GETJOCTET(value)  ((value) & 0xFF)
+
 #endif /* __CHAR_UNSIGNED__ */
 
 #endif /* HAVE_UNSIGNED_CHAR */
@@ -124,21 +132,21 @@ typedef char JOCTET;
 /* UINT8 must hold at least the values 0..255. */
 
 #ifdef HAVE_UNSIGNED_CHAR
-typedef unsigned char UINT8;
+
 #else /* not HAVE_UNSIGNED_CHAR */
 #ifdef __CHAR_UNSIGNED__
-typedef char UINT8;
+
 #else /* not __CHAR_UNSIGNED__ */
-typedef short UINT8;
+
 #endif /* __CHAR_UNSIGNED__ */
 #endif /* HAVE_UNSIGNED_CHAR */
 
 /* UINT16 must hold at least the values 0..65535. */
 
 #ifdef HAVE_UNSIGNED_SHORT
-typedef unsigned short UINT16;
+
 #else /* not HAVE_UNSIGNED_SHORT */
-typedef unsigned int UINT16;
+
 #endif /* HAVE_UNSIGNED_SHORT */
 
 /* INT16 must hold at least the values -32768..32767. */

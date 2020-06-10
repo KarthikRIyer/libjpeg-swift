@@ -24,7 +24,7 @@ let package = Package(
             path: "Sources/libjpeg",
             linkerSettings:[
               .linkedLibrary("jpeg"),
-              .unsafeFlags(["-L/home/karthik/libjpeg-install/lib/", "-use-ld=gold"], .when(platforms: [.linux])),
+              .unsafeFlags(["-L/home/karthik/libjpeg-install/lib/"]),
             ]
             ),
         .target(
